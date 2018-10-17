@@ -101,3 +101,17 @@ print(is_cyclone_phrase("settled"))
 print(is_cyclone_phrase("all alone at noon"))
 print(is_cyclone_phrase("by myself at twelve pm"))
 print(is_cyclone_phrase("acb"))
+
+#Write a function that generates the next level of Pascal’s triangle given a list that represents a valid row of Pascal’s triangle.
+
+def generate_pascal_row(row):
+    if not row:
+        return [1]
+    return [left + right for left, right in zip([0] + row, row + [0])]
+
+#############
+
+
+#Polygon Collision
+
+
