@@ -44,13 +44,17 @@ gcd(1, 1)  # => 1
 # zad3
 
 my_map = {"CA": "US", "NY": "US", "ON": "CA"}
-inv_map = {value: key for key, value in my_map.items()}
-inv_map = {}
-for key, value in my_map.items():
-    inv_map[value] = inv_map.get(value, [])
-    inv_map[value].append(key)
 
-print(inv_map)
+
+def flip_dict(my_dict):
+    inv_map = {}
+    for key, value in my_dict.items():
+        inv_map[value] = inv_map.get(value, [])
+        inv_map[value].append(key)
+    print(inv_map)
+
+
+flip_dict(my_map)
 
 # zad4
 
