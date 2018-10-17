@@ -58,3 +58,26 @@ flip_dict(my_map)
 
 # zad4
 
+print('1', [x for x in [1, 2, 3, 4]])
+print('2', [n - 2 for n in range(10)])
+print('3', [k % 10 for k in range(41) if k % 3 == 0])
+print('4', [s.lower() for s in ['PythOn', 'iS', 'cOoL'] if s[0] < s[-1]])
+
+# Something is fishy here. Can you spot it?
+arr = [[3, 2, 1], ['a', 'b', 'c'], [('do',), ['re'], 'mi']]
+print(arr)
+print('5',[el.append(el[0] * 4) for el in arr] ) # What does this return?
+# What is the content of `arr` at this point?
+
+print('6', [letter for letter in "pYthON" if letter.isupper()])
+print('7', {len(w) for w in ["its", "the", "remix", "to", "ignition"]})
+
+#Write a comprehension to transform the input data structure into the output data structure
+
+print([x*2+1 for x in [0, 1, 2, 3]])
+print([x % 3 == 0 for x in [3, 5, 9, 8]])
+print([x.split('_')[1] for x in ["TA_sam", "TA_guido", "student_poohbear", "student_htiek"]if x.startswith('TA')])
+print([x.upper()[0] for x in['apple', 'orange', 'pear']])
+print([x for x in['apple', 'orange', 'pear'] if x != 'orange'])
+print([(x, x.__len__()) for x in['apple', 'orange', 'pear']])
+print({x: x.__len__() for x in['apple', 'orange', 'pear']})
