@@ -81,3 +81,23 @@ print([x.upper()[0] for x in['apple', 'orange', 'pear']])
 print([x for x in['apple', 'orange', 'pear'] if x != 'orange'])
 print([(x, x.__len__()) for x in['apple', 'orange', 'pear']])
 print({x: x.__len__() for x in['apple', 'orange', 'pear']})
+
+#Write a function that to determine whether an entire phrase passed into a function is made of cyclone words. You can assume that all words are made of only alphabetic characters, and are separated by whitespace.
+
+def is_cyclone_word(word):
+    word = word.upper()
+    letters = [None] * len(word)
+    half = (len(word) + 1) // 2
+    letters[::2] = word[:half]
+    letters[1::2] = word[:half - 1:-1]
+    return all([left <= right for left, right in zip(letters, letters[1:])])
+
+
+def is_cyclone_phrase(phrase):
+    return all([is_cyclone_word(word) for word in phrase.split()])
+
+print(is_cyclone_phrase("adjourned"))
+print(is_cyclone_phrase("settled"))
+print(is_cyclone_phrase("all alone at noon"))
+print(is_cyclone_phrase("by myself at twelve pm"))
+print(is_cyclone_phrase("acb"))
