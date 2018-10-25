@@ -38,3 +38,24 @@ keyword_args(5, 2, [], 5)
 #keyword_args(1, 7, e=6) keyword_args() got an unexpected keyword argument 'e'
 keyword_args(1, c=7)
 #keyword_args(5, 2, b=4)  keyword_args() got multiple values for keyword argument 'b'
+
+#Exploring Variadic Argument lists
+
+def variadic(*args, **kwargs):
+    print("Positional:", args)
+    print("Keyword:", kwargs)
+    print("-------------------------")
+    
+variadic(2, 3, 5, 7)
+variadic(1, 1, n=1)
+#variadic(n=1, 2, 3) non-keyword arg after keyword arg
+variadic()
+variadic(cs="Computer Science", pd="Product Design")
+#variadic(cs="Computer Science", cs="CompSci", cs="CS") keyword argument repeated
+variadic(5, 8, k=1, swap=2)
+variadic(8, *[3, 4, 5], k=1, **{'a':5, 'b':'x'})
+#variadic(*[8, 3], *[4, 5], k=1, **{'a':5, 'b':'x'}) invalid syntax
+#variadic(*[3, 4, 5], 8, *(4, 1), k=1, **{'a':5, 'b':'x'}) invalid syntax
+variadic({'a':5, 'b':'x'}, *{'a':5, 'b':'x'}, **{'a':5, 'b':'x'})
+
+
