@@ -298,3 +298,70 @@ print(my_function.__doc__)
 #
 #     Description: No, really, it doesn't do anything.
 
+#Code Object (__code__)
+
+def all_together(x, y, z=1, *nums, indent=True, spaces=4, **options):
+    """A useless comment"""
+    print(x + y * z)
+    print(sum(nums))
+    for k, v in options.items():
+        if indent:
+            print("{}\t{}".format(k, v))
+        else:
+            print("{}{}{}".format(k, " " * spaces, v))
+
+
+code = all_together.__code__
+
+print(all_together.__doc__)
+print(code.co_argcount)
+print(code.co_cellvars)
+print(code.co_code)
+print(code.co_consts)
+print(code.co_filename)
+print(code.co_firstlineno)
+print(code.co_flags)
+print(code.co_freevars)
+print(code.co_kwonlyargcount)
+print(code.co_lnotab)
+print(code.co_name)
+print(code.co_names)
+print(code.co_nlocals)
+print(code.co_stacksize)
+print(code.co_varnames)
+
+#Security
+
+def nice(): print("You're awesome!")
+def mean(): print("You're... not awesome. OOOOH")
+
+# Overwrite the code object for nice
+nice.__code__ = mean.__code__
+nice()  # prints "You're... not awesome. OOOOH"
+
+
+#dis module, for "disassemble," exports a dis function that allows us to disassemble Python byte code
+def gcd(a, b):
+    while b:
+        a, b = b, a % b
+    return a
+
+
+import dis
+
+dis.dis(gcd)
+
+
+def annotated(a: int, b: str) -> list:
+    return [a, b]
+#Parameter Annotations (__annotations__)
+print(annotated.__annotations__)
+# {'b': <class 'str'>, 'a': <class 'int'>, 'return': <class 'list'>}
+
+#Call (__call__)
+
+def greet(): print("Hello world!")
+
+greet() # "Hello world!"
+# is just syntactic sugar for
+greet.__call__()  # "Hello world!"
