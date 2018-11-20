@@ -9,8 +9,8 @@ print_two(4, 1)
 #print_two(4, a=1)  #invalid
 #print_two(4, 1, 1)  #invalid
 #print_two(b=4, 1)  #invalid
-print_two(a=4, b=1)  #invalid
-print_two(b=1, a=4)  #invalid
+print_two(a=4, b=1) 
+print_two(b=1, a=4) 
 #print_two(1, a=1)  #invalid
 #print_two(4, 1, b=1)  #invalid
 
@@ -229,4 +229,72 @@ def foo():
 print("(outside foo) x:", x)
 foo()
 print("(after foo) x:", x)
+
+#Default Mutable Arguments - A Dangerous Game
+
+x = 5
+
+def square(num=x):
+    return num * num
+
+x = 6
+print(square())
+print(square(x))
+
+def append_twice(a, lst=[]):
+    lst.append(a)
+    lst.append(a)
+    return lst
+
+
+# Works well when the keyword is provided
+append_twice(1, lst=[4])  # => [4, 1, 1]
+append_twice(11, lst=[2, 3, 5, 7])  # => [2, 3, 5, 7, 11, 11]
+
+# But what happens here?
+print(append_twice(1))
+print(append_twice(2))
+print(append_twice(3))
+
+
+def fib(n, cache={0: 1, 1: 1}):
+   if n in cache:  # Note: default value captures our base cases
+       return cache[n]
+   out = fib(n-1) + fib(n-2)
+   cache[n] = out
+   return out
+
+
+print(fib(1))
+print(fib(2))
+print(fib(3))
+print(fib(4))
+print(fib(10))
+
+#Investigating Function Objects
+
+def all_together(x, y, z=1, *nums, indent=True, spaces=4, **options):
+    print("x:", x)
+    print("y:", y)
+    print("z:", z)
+    print("nums:", nums)
+    print("indent:", indent)
+    print("spaces:", spaces)
+    print("options:", options)
+
+print(all_together.__defaults__) #wszystkie wartosci domyslne poprzedzajace *nums zostaja wypisane
+print(all_together.__kwdefaults__)  #wszystkie zmienne oraz wartosci domyslne poprzedzajace **options zostaja wypisane
+
+def my_function():
+    """Summary line: do nothing, but document it.
+
+    Description: No, really, it doesn't do anything.
+    """
+    pass
+
+
+print(my_function.__doc__)
+# Summary line: Do nothing, but document it.
+#
+#     Description: No, really, it doesn't do anything.
 
