@@ -50,14 +50,14 @@ class SimpleGraph:
             print("To nie wierzchołek!")
 
     def get_neighbors(self, v):
-        somsiedzi = []
+        ngbh = []
         if type(v) is Vertex:
             for x in self.edges:
                 if x.start == v:
-                    somsiedzi.append(x.end.name)
+                    ngbh.append(x.end.name)
                 elif x.end == v:
-                    somsiedzi.append(x.start.name)
-            return somsiedzi
+                    ngbh.append(x.start.name)
+            return ngbh
         else:
             print("To nie wierzchołek!")
 
@@ -100,7 +100,15 @@ class SimpleGraph:
             print("To nie wierzchołek!")
 
     def is_reachable(self, v1, v2):
-        pass
+        for x in self.edges:
+            if x.start == v1:
+                if x.start == v1 and x.end == v2:
+                    print("znaleziono połączenie")
+                    return True
+                else:
+                    print("wejscie do petli:","x",x.start.name,"v2",v2.name,"x.end",x.end.name)
+                    self.is_reachable(x.end, v2)
+
 
     def clear_all(self):
         self.edges.clear()
@@ -132,3 +140,20 @@ print(sg.contains_edge(vt, vz))
 sg.add_edge(vt, vz)
 print(sg.contains_edge(vt, vz))
 print(sg.is_neighbor(vt, vz))
+
+sg.clear_all()
+a = Vertex("a")
+b = Vertex("b")
+c = Vertex("c")
+d = Vertex("d")
+e = Vertex("e")
+f = Vertex("f")
+
+sg.add_edge(a,b)
+sg.add_edge(b,c)
+sg.add_edge(b,f)
+sg.add_edge(c,d)
+sg.add_edge(c,e)
+
+print("----------------")
+print(sg.is_reachable(a,f))
